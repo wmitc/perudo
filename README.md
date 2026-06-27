@@ -51,8 +51,26 @@ pytest                      # run the test suite
 python -m perudo.cli        # play against the bots (coming soon)
 ```
 
-For the notebook extras: `pip install -e ".[notebook]"`.
+For the notebook extras: `pip install -e ".[notebook]"`, then open
+`notebooks/perudo_inference.ipynb` for the full derivation and plots.
 
-## Status
+Watch the bots play and explain themselves:
 
-Built incrementally via reviewed pull requests. See the issues/PRs for progress.
+```bash
+python -m perudo.cli --watch --show-beliefs
+python -m perudo.simulate          # win rates + calibration report
+```
+
+## Results
+
+Both bots share the *same* decision policy; the only difference is that the
+Bayesian bot evaluates bids against a posterior informed by the bidding history.
+In self-play with rotated seating:
+
+- **Bayesian beats the counting baseline ~73%** of head-to-head games.
+- The bot stays **well-calibrated** — Brier score ≈ **0.125** (vs. 0.25 for an
+  uninformative coin-flip) — with a mild, tunable overconfidence in the upper-mid
+  probability range.
+
+See `notebooks/perudo_inference.ipynb` for the model, the posterior-update demo,
+and these plots.
