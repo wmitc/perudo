@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "perudo"
+version = "0.1.0"
+description = "Perudo (Liar's Dice) with a Bayesian bot that infers hidden dice from the bidding history."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "wmitc" }]
+keywords = ["perudo", "liars-dice", "bayesian", "inference", "game"]
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4"]
+notebook = ["matplotlib>=3.7", "jupyter>=1.0"]
+
+[project.scripts]
+perudo = "perudo.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["perudo*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
